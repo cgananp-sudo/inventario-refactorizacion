@@ -30,3 +30,12 @@ class InventarioService:
 
     def obtener_inventario(self):
         return [construir_item(p) for p in self.repositorio.listar()]
+
+
+def obtener_inventario():
+    """Misma firma que la versión legada (compatibilidad)."""
+    conexion = conectar_db()
+    try:
+        return InventarioService(ProductoRepositorio(conexion)).obtener_inventario()
+    finally:
+        conexion.close()
